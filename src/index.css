@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,74 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #faeee7;
+  color: #594a4e;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+}
+
+main {
+  /* height: 100vh; */
+  /* title color: #33272a */
+  /* highlight color: #ff8ba7 */
+  /* secondary color: #ffc6c7 */
+  /* tertiary: #c3f0ca */
+}
+
+.home1{
+  /* height: 100vh; */
+  /* background-image: url("./photos/img2.jpg"); */
+
+  /* background-image: url("/public/img3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+}
+
+h2 {
+  font-size: xx-large;
+}
+
+.parentScroll{
+  scroll-snap-type: y mandatory;
+}
+
+.scroller{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.img-showcase img{
+  max-height: 600px;
+  object-fit: fill;
+  margin: auto;
+}
+
+.card {
+  flex-direction: column;
+  border-radius: .25rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+  background-color: pink;
+  transform: perspective(1000px) rotateY(var(--rotate-y,0));
+  transform-style: preserve-3d;
+  transition: 150ms;
+}
+
+.card.flip {
+  --rotate-y: 180deg;
+  font-size: 1rem;
+}
+
+.card .front,
+.card .back {
+  padding:.75rem;
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+}
+
+.card .back{
+  transform: rotateY(180deg);
 }
