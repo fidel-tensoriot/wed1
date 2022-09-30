@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import axios from "axios";
 import img1 from "../photos/img1.jpg";
 import img2 from "../photos/img2.jpg";
 import img3 from "../photos/img3.jpg";
 import p1 from "../photos/p1.jpg";
 import p2 from "../photos/p2.jpg";
 import Cards from "../components/Cards/Cards";
-import axios from "axios";
+import Timeline from "../components/Timeline";
 
 function Home() {
+    const [loading, setLoading] = useState(false)
     let urlPhoto = process.env.REACT_APP_PHOTO_API;
     let urlForm = process.env.REACT_APP_FORM_API;
 
     async function handleSubmit(event, url) {
         event.preventDefault();
+        setLoading(true)
         const formData = new FormData(event.currentTarget);
         const values = Object.fromEntries(formData.entries());
         console.log(values, typeof values);
@@ -22,6 +25,7 @@ function Home() {
         if (data.url) {
             downloadPhotos(data.url);
         }
+        setLoading(false)
     }
 
     function downloadPhotos(downloadUrl) {
@@ -106,6 +110,7 @@ function Home() {
                                     name="name"
                                     type="text"
                                     placeholder="Full Name"
+                                    required={true}
                                 />
                             </div>
                             <div className="flex gap-2 p-4">
@@ -116,6 +121,7 @@ function Home() {
                                     name="email"
                                     type="text"
                                     placeholder="Full Email"
+                                    required={true}
                                 />
                             </div>
                             <div className="flex gap-2 p-4">
@@ -125,7 +131,7 @@ function Home() {
                                     id="notes"
                                     name="notes"
                                     type="text"
-                                    placeholder="Hey I can't be anywhere near a peanut, allergies"
+                                    placeholder="Hey I can't be near peanuts, allergies"
                                 />
                             </div>
                             {/* <div className="flex gap-2 p-4">
@@ -161,11 +167,16 @@ function Home() {
                                     name="name"
                                     type="text"
                                     placeholder="Ron and Claire"
+                                    required={true}
                                 />
                             </div>
-                            <button className="mt-4 p-4 bg-red-500 rounded">
-                                Submit
-                            </button>
+                            {loading ? (
+                                <p>Loading</p>
+                            ): (
+                                <button className="mt-4 p-4 bg-red-500 rounded">
+                                    Submit
+                                </button>
+                            )}
                         </form>
                         <button
                             className=" mt-4 p-4 bg-red-500 rounded md:hidden"
@@ -175,8 +186,11 @@ function Home() {
                         >
                             Share to IG
                         </button>
-                    </Cards>
+                    </Cards>                    
                 </div>
+            </section>
+            <section className=" min-h-screen bg-pink-50 text-center">
+                <Timeline/>
             </section>
         </>
     );

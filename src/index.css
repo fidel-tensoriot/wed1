@@ -80,3 +80,226 @@ h2 {
 .card .back{
   transform: rotateY(180deg);
 }
+
+
+/* ------------------------------------------------------- */
+/* .pricing-card{
+  max-width: 80rem;
+  padding: 1rem;
+  position: relative; 
+}
+
+.pricing-card > ul{
+  padding-left: 1rem;
+}
+
+.pricing-card > li{
+  list-style-type: disc;
+}
+
+.pricing-card::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  border: solid red;
+}
+
+.pricing-card > h3{
+  font-weight: 700;
+  font-size: 1.3em;
+  padding-bottom: .3rem;
+}
+
+.pricing-card.info{
+  border: .5rem solid pink;
+  border-radius: 1rem;
+  background-color: red;
+  padding: .8rem;
+}
+
+.pricing-card:nth-child(odd){
+  padding-right: 10%;
+}
+
+.pricing-card:nth-child(odd) > h3::before{
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: -5px;
+  background: white;
+  border-radius: 999px;
+}
+
+.pricing-card:nth-child(odd)::before{
+  left: 0px;
+  top: -4.5px;
+  bottom: -4.5px;
+  border-width: 5px 0 5px 5px;
+  border-radius: 50px 0 0 50px;
+}
+
+.pricing-card:first-child::before{
+  border-top: 0;
+  border-top-left-radius: 0;
+}
+
+
+.pricing-card:nth-child(even){
+  padding-left: 15%;
+}
+
+.pricing-card > h3{
+  text-align: right;
+}
+
+.pricing-card:nth-child(even) > h3::before{
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -5px;
+  background: white;
+  border-radius: 999px;
+}
+
+.pricing-card::before{
+  right:0;
+  top: 0;
+  bottom: 0;
+  border-width: 5px 5px 5px 0;
+  border-radius: 0 50px 50px 0;
+} */
+
+/* Timeline Container */
+.timeline {
+  /* background: #212121; */
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+}
+
+.outer{
+  margin: auto;
+}
+
+/* Card container */
+.time-card {
+  position: relative;
+  max-width: 1200px;
+}
+
+/* setting padding based on even or odd */
+.time-card:nth-child(odd) {
+  padding: 30px 0 30px 30px;
+}
+
+.time-card:nth-child(even) {
+  padding: 30px 30px 30px 0;
+}
+
+/* Global ::before */
+.time-card::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  border: solid pink;
+}
+
+/* Setting the border of top, bottom, left */
+.time-card:nth-child(odd)::before {
+  left: 0px;
+  top: -4.5px;
+  bottom: -4.5px;
+  border-width: 5px 0 5px 5px;
+  border-radius: 50px 0 0 50px;
+}
+
+/* Setting the top and bottom to "-5px" because earlier it was out of a pixel in mobile devices */
+@media only screen and (max-width: 400px) {
+  .time-card:nth-child(odd)::before {
+    top: -5px;
+    bottom: -5px;
+  }
+}
+
+/* Setting the border of top, bottom, right */
+.time-card:nth-child(even)::before {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-width: 5px 5px 5px 0;
+  border-radius: 0 50px 50px 0;
+}
+
+/* Removing the border if it is the first card */
+.time-card:first-child::before {
+  border-top: 0;
+  border-top-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's odd */
+.time-card:last-child:nth-child(odd)::before {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's even */
+.time-card:last-child:nth-child(even)::before {
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Information about the timeline */
+.info {
+  display: flex;
+  flex-direction: column;
+  /* background: #faeee7; */
+  background: pink;
+  color: gray;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Title of the card */
+.title {
+  color: black;
+  font-weight: 800;
+  position: relative;
+  font-size: x-large;
+}
+
+/* Timeline dot  */
+.title::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #faeee7;
+  border-radius: 999px;
+  border: 3px solid rgb(244 114 182 / var(--tw-bg-opacity));
+}
+
+/* text left if the card is odd  */
+.time-card:nth-child(odd) > .info > .title {
+  text-align: left;
+}
+
+/* text right if the card is even  */
+.time-card:nth-child(even) > .info > .title {
+  text-align: right;
+}
+
+/* setting dot to the left if the card is odd */
+.time-card:nth-child(odd) > .info > .title::before {
+  left: -45px;
+}
+
+/* setting dot to the right if the card is odd */
+.time-card:nth-child(even) > .info > .title::before {
+  right: -45px;
+}
+
+.timeline-body > img {
+  max-width: 600px;
+}
