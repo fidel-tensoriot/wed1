@@ -14,7 +14,7 @@ function Timeline() {
             <div className="outer">
                 {timelineData.map((timelineYear) => {
                     return (
-                        <div className="time-card">
+                        <div key={timelineYear.title} className="time-card">
                             <div className="info">
                                 <h3 className="title">{timelineYear.title}</h3>
                                 <div className="timeline-body block md:flex">
