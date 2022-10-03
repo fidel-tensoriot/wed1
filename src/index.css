@@ -304,3 +304,8 @@ h2 {
   max-width: 600px;
   width: 100%;
 }
+
+.timeline-body > video {
+  max-width: 600px;
+  width: 100%;
+}
