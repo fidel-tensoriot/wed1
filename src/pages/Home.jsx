@@ -19,7 +19,7 @@ function Home() {
         const formData = new FormData(event.currentTarget);
         const values = Object.fromEntries(formData.entries());
         console.log(values, typeof values);
-
+        
         const { data } = await axios.post(url, values);
         console.log(data);
         if (data.url) {
@@ -84,7 +84,7 @@ function Home() {
                     </p>
                 </div>
             </div>
-            <section className=" min-h-screen bg-gray-50 parentScroll text-center">
+            <section className=" min-h-screen bg-gray-50 parentScroll text-center" id="rsvp">
                 <h2 className="pt-8"> I want you here to stick to...</h2>
                 <p>Click on button to to see more</p>
                 <div className="grid md:flex p-8 gap-8 img-showcase scroller">

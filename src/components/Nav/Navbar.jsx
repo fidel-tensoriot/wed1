@@ -12,8 +12,8 @@ function Navbar() {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex gap-x-10">
                     <a href="/#">Home</a>
-                    <a href="/#">RSVP</a>
-                    {/* <a href=""></a> */}
+                    <a href="/#rsvp">RSVP</a>
+                    <a href="/gallery">Gallery</a>
                 </div>
 
                 {/* Mobile Menu */}
@@ -25,8 +25,13 @@ function Navbar() {
                             </a>
                         </li>
                         <li>
-                            <a href="/" className="p-4">
+                            <a href="/#rsvp" className="p-4">
                                 RSVP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/gallery" className="p-4">
+                                Gallery
                             </a>
                         </li>
                     </ul>
