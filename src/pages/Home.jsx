@@ -9,23 +9,23 @@ import Cards from "../components/Cards/Cards";
 import Timeline from "../components/Timeline";
 
 function Home() {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     let urlPhoto = process.env.REACT_APP_PHOTO_API;
     let urlForm = process.env.REACT_APP_FORM_API;
 
     async function handleSubmit(event, url) {
         event.preventDefault();
-        setLoading(true)
+        setLoading(true);
         const formData = new FormData(event.currentTarget);
         const values = Object.fromEntries(formData.entries());
         console.log(values, typeof values);
-        
+
         const { data } = await axios.post(url, values);
         console.log(data);
         if (data.url) {
             downloadPhotos(data.url);
         }
-        setLoading(false)
+        setLoading(false);
     }
 
     function downloadPhotos(downloadUrl) {
@@ -60,42 +60,85 @@ function Home() {
                 <div className="container flex flex-col min-h-screen justify-around gap-20">
                     <h2 className="py-8 scroller">Welcome, You're Invited</h2>
                     <p>
-                        Hello friends and family! If you're looking for
-                        information about the event, look no further!
-                        Party/Details Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Dicta laudantium eligendi itaque enim,
-                        ex quo vel, deserunt sapiente quaerat assumenda tempora?
-                        Laboriosam expedita, sed quaerat minus ipsa nemo
-                        doloremque nobis.
+                        Karina and I will be getting married on Friday June
+                        27th,2025 in Las Vegas. We are excited to also be
+                        celebrating our 10 year anniversary as we go through our
+                        Eras tour of life together.
+                        <br /> <br />
+                        It is advised to book a hotel of your choice preferably
+                        a day before and on the strip so that you do not miss
+                        the ceremony or the reception. We will be in vegas the
+                        day before and after so bring gambling money
+                        <br /> <br />
+                        <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+                            <a
+                                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karina+and+Fidel+Las+Vegas+Wedding&dates=20250627T120000/20250627T170000&details=Join+us+for+our+wedding+ceremony+and+reception+in+Las+Vegas!+Ceremony+at+1pm+at+Chapel+of+the+Flowers,+reception+at+2pm+at+Maggiano's.+We+look+forward+to+celebrating+with+you!&location=1717+Las+Vegas+Blvd+S,+Las+Vegas,+NV+89104"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-white"
+                            >
+                                Add to Google Calendar
+                            </a>
+                        </button>
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Minus sint eos, eum sit temporibus, soluta libero, fuga
-                        voluptatibus cum odio delectus. Necessitatibus, et
-                        repellat inventore eveniet recusandae repudiandae
-                        deserunt molestiae!
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Minus sint eos, eum sit temporibus, soluta libero, fuga
-                        voluptatibus cum odio delectus. Necessitatibus, et
-                        repellat inventore eveniet recusandae repudiandae
-                        deserunt molestiae!
+                        Wedding Ceremony: 12pm @
+                        <a
+                            href="https://www.google.com/maps?q=Chapel+of+the+Flowers,1717+Las+Vegas+Blvd+S,Las+Vegas,NV,89104"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 underline"
+                        >
+                            Chapel of the Flowers
+                        </a>
+                        1717 Las Vegas Blvd S, Las Vegas, NV 89104
+                        <br /> <br />
+                        Wedding Reception: 2pm - 5pm @
+                        <a
+                            href="https://www.google.com/maps?q=Maggiano's,3200+Las+Vegas+Blvd+S+Suite+2144,Las+Vegas,NV,89109"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 underline"
+                        >
+                            Maggiano's
+                        </a>
+                        3200 Las Vegas Blvd S Suite 2144, Las Vegas, NV 89109
                     </p>
                 </div>
             </div>
-            <section className=" min-h-screen bg-gray-50 parentScroll text-center" id="rsvp">
+            <section
+                className=" min-h-screen bg-gray-50 parentScroll text-center"
+                id="rsvp"
+            >
                 <h2 className="pt-8"> I want you here to stick to...</h2>
                 <p>Click on button to to see more</p>
                 <div className="grid md:flex p-8 gap-8 img-showcase scroller">
                     <Cards
                         img={img2}
                         title="Our Story"
-                        body="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Minus sint eos, eum sit temporibus, soluta libero, fuga
-                        voluptatibus cum odio delectus. Necessitatibus, et
-                        repellat inventore eveniet recusandae repudiandae
-                        deserunt molestiae!"
+                        body={
+                            <div className="py-12 space-y-12">
+                                <p>
+                                    On June 27th 2015, Karina and I met at one
+                                    of our friends shows. We probably would have
+                                    met eventually but we met at a warehouse in
+                                    Santa Ana and then the following week at one
+                                    of our mutually favorite places, Echo Park.
+                                    We talked about how Karina has 3 brothers
+                                    and me having 3 sisters, or our parents were
+                                    from the same state of Mexico, or our dads
+                                    being both mechanics. We realized very
+                                    quickly that we were meant for each other.
+                                </p>
+
+                                <p>
+                                    When I met Karina it was a fun time with
+                                    friends and its felt that way for the past
+                                    10 years. Hoping for many more and our
+                                    continued growth into our future.
+                                </p>
+                            </div>
+                        }
                     />
                     <Cards img={p1} title="RSVP">
                         <form
@@ -172,7 +215,7 @@ function Home() {
                             </div>
                             {loading ? (
                                 <p>Loading</p>
-                            ): (
+                            ) : (
                                 <button className="mt-4 p-4 bg-red-500 rounded">
                                     Submit
                                 </button>
@@ -186,11 +229,11 @@ function Home() {
                         >
                             Share to IG
                         </button>
-                    </Cards>                    
+                    </Cards>
                 </div>
             </section>
             <section className=" min-h-screen bg-pink-50 text-center">
-                <Timeline/>
+                <Timeline />
             </section>
         </>
     );

@@ -7,13 +7,13 @@ import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
     return (
-        <div className="flex flex-col min-h-screen justify-between"> {/*  min-h-screen */}
-            <Navbar/>
+        <div className="flex flex-col min-h-screen justify-between">
+            <Navbar />
             <Routes>
-                <Route path="/" element={<Home/>} />
-                <Route path="/gallery" element={<Gallery/>}/>
+                <Route path="/" element={<Home />} />
+                <Route path="/gallery" element={<Gallery />} />
             </Routes>
-            <Footer/>
+            <Footer />
         </div>
     );
 }

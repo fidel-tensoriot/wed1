@@ -24,9 +24,6 @@ def lambda_handler(event, context=None):
         # 'body': json.dumps(url)
         'body': f"Wrote to the DB{body}"
     }
-    
-    
-    
 
 # If local env, test using this. 
 if __name__ == "__main__":
