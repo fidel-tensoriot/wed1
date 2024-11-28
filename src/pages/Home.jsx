@@ -16,7 +16,8 @@ function Home() {
     async function handleSubmit(event, url) {
         event.preventDefault();
         setLoading(true);
-        const formData = new FormData(event.currentTarget);
+        const form = event.currentTarget;
+        const formData = new FormData(form);
         const values = Object.fromEntries(formData.entries());
         console.log(values, typeof values);
 
@@ -24,6 +25,9 @@ function Home() {
         console.log(data);
         if (data.url) {
             downloadPhotos(data.url);
+        }
+        if (url === urlForm) {
+            form.reset();
         }
         setLoading(false);
     }
@@ -48,7 +52,9 @@ function Home() {
                 {/* Image for Desktop */}
                 <div className="absolute hidden: md:block md:top-80 2xl:left-80 text-center bg-pink-50 opacity-80">
                     <h1 className="text-3xl lg:text-7xl">Fidelmar & Karina</h1>
-                    <p className="text-3xl">We the best</p>
+                    <p className="text-3xl">
+                        All along there was some string tying you to me
+                    </p>
                 </div>
                 <img
                     className="max-w-screen hidden md:block scroller"
@@ -61,14 +67,28 @@ function Home() {
                     <h2 className="py-8 scroller">Welcome, You're Invited</h2>
                     <p>
                         Karina and I will be getting married on Friday June
-                        27th,2025 in Las Vegas. We are excited to also be
-                        celebrating our 10 year anniversary as we go through our
-                        Eras tour of life together.
+                        27th, 2025 in lovely Las Vegas, Nevada and would love it
+                        if you'd come celebrate with us. We are excited to also
+                        be getting married on our 10 year anniversary, please
+                        join us as we go through our very own Eras tour of life
+                        together. It's been a long time coming...
                         <br /> <br />
                         It is advised to book a hotel of your choice preferably
                         a day before and on the strip so that you do not miss
-                        the ceremony or the reception. We will be in vegas the
-                        day before and after so bring gambling money
+                        the ceremony or the reception- details down below. We
+                        will be in Vegas the day before and after so bring
+                        gambling money.
+                        <br /> <br />
+                        Although we love your little ones, our wedding will be
+                        an adult-only celebration. Only immediate family will be
+                        excluded from this rule.
+                        <br /> <br />
+                        <p>
+                            Get ready for second breakfast as we begin this
+                            journey in middle earth to get the one ring to rule
+                            them all.
+                        </p>
+                        <p>Please RSVP by January 6, 2025 </p>
                         <br /> <br />
                         <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
                             <a
@@ -111,7 +131,7 @@ function Home() {
                 id="rsvp"
             >
                 <h2 className="pt-8"> I want you here to stick to...</h2>
-                <p>Click on button to to see more</p>
+                <p>Click on "Flip Card" button to to see more</p>
                 <div className="grid md:flex p-8 gap-8 img-showcase scroller">
                     <Cards
                         img={img2}
@@ -140,44 +160,74 @@ function Home() {
                             </div>
                         }
                     />
-                    <Cards img={p1} title="RSVP">
-                        <form
-                            className="grid gap-2"
-                            onSubmit={(event) => handleSubmit(event, urlForm)}
-                        >
-                            <div className="flex gap-2 p-4">
-                                <label>Name:</label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Full Name"
-                                    required={true}
-                                />
-                            </div>
-                            <div className="flex gap-2 p-4">
-                                <label>Email:</label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="email"
-                                    name="email"
-                                    type="text"
-                                    placeholder="Full Email"
-                                    required={true}
-                                />
-                            </div>
-                            <div className="flex gap-2 p-4">
-                                <label>Notes:</label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="notes"
-                                    name="notes"
-                                    type="text"
-                                    placeholder="Hey I can't be near peanuts, allergies"
-                                />
-                            </div>
-                            {/* <div className="flex gap-2 p-4">
+                    <Cards img={p1} title="Please RSVP by January 6, 2025">
+                        <>
+                            <p>
+                                Although we love your little ones our wedding
+                                will be an adult-only celebration. Only
+                                immediate family will be excluded from this rule
+                            </p>
+                            <form
+                                className="grid gap-2"
+                                onSubmit={(event) =>
+                                    handleSubmit(event, urlForm)
+                                }
+                            >
+                                <div className="flex gap-2 p-4">
+                                    <label>Name:</label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        placeholder="Full Name"
+                                        required={true}
+                                    />
+                                </div>
+                                <div className="flex gap-2 p-4">
+                                    <label>Email:</label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="email"
+                                        name="email"
+                                        type="text"
+                                        placeholder="Full Email"
+                                        required={true}
+                                    />
+                                </div>
+                                <div className="flex gap-2 p-4">
+                                    <label>Notes:</label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="notes"
+                                        name="notes"
+                                        type="text"
+                                        placeholder="Hey I can't be near peanuts, allergies or im vegan etc"
+                                    />
+                                </div>
+                                <div className="flex gap-2 p-4">
+                                    <label>Address:</label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="address"
+                                        name="address"
+                                        type="text"
+                                        placeholder="1234 W Fake St, Los Angeles CA 90001 Apt#1"
+                                    />
+                                </div>
+                                <div className="flex gap-2 p-4">
+                                    <label>
+                                        Favorite Taylor Swift Era/Song:
+                                    </label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="swiftNote"
+                                        name="swiftNote"
+                                        type="text"
+                                        placeholder="Reputation Era"
+                                    />
+                                </div>
+                                {/* <div className="flex gap-2 p-4">
                                 <label>Guests:</label>
                                 <select>
                                     <option value="1">1</option>
@@ -189,10 +239,15 @@ function Home() {
                                     <option value="7">7+ msg first</option>
                                 </select>
                             </div> */}
-                            <button className="p-4 bg-red-500 rounded">
-                                Submit
-                            </button>
-                        </form>
+                                {loading ? (
+                                    <p>Sending...</p>
+                                ) : (
+                                    <button className="p-4 bg-red-500 rounded">
+                                        Submit
+                                    </button>
+                                )}
+                            </form>
+                        </>
                     </Cards>
                     <Cards
                         img={p2}
@@ -214,7 +269,7 @@ function Home() {
                                 />
                             </div>
                             {loading ? (
-                                <p>Loading</p>
+                                <p>Loading...</p>
                             ) : (
                                 <button className="mt-4 p-4 bg-red-500 rounded">
                                     Submit
