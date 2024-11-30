@@ -85,8 +85,8 @@ function Home() {
                         <br /> <br />
                         <p>
                             Get ready for second breakfast as we begin this
-                            journey in middle earth to get the one ring to rule
-                            them all.
+                            journey in middle <s>earth</s> age to get the one
+                            ring to rule them all.
                         </p>
                         <p>Please RSVP by January 6, 2025 </p>
                         <br /> <br />
