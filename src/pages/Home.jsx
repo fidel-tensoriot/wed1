@@ -126,10 +126,7 @@ function Home() {
                     </p>
                 </div>
             </div>
-            <section
-                className=" min-h-screen bg-gray-50 parentScroll text-center"
-                id="rsvp"
-            >
+            <section className=" min-h-screen bg-gray-50 parentScroll text-center">
                 <h2 className="pt-8"> I want you here to stick to...</h2>
                 <p>Click on "Flip Card" button to to see more</p>
                 <div className="grid md:flex p-8 gap-8 img-showcase scroller">
@@ -160,7 +157,11 @@ function Home() {
                             </div>
                         }
                     />
-                    <Cards img={p1} title="Please RSVP by January 6, 2025">
+                    <Cards
+                        id="rsvp"
+                        img={p1}
+                        title="Please RSVP by January 6, 2025"
+                    >
                         <>
                             <p>
                                 Although we love your little ones our wedding
