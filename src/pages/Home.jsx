@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import img1 from "../photos/img1.jpg";
 import img2 from "../photos/img2.jpg";
-import img3 from "../photos/img3.jpg";
+import img5 from "../photos/img5.jpg";
 import p1 from "../photos/p1.jpg";
 import p2 from "../photos/p2.jpg";
 import Cards from "../components/Cards/Cards";
@@ -58,7 +58,7 @@ function Home() {
                 </div>
                 <img
                     className="max-w-screen hidden md:block scroller"
-                    src={img3}
+                    src={img5}
                     alt=""
                 />
             </div>
