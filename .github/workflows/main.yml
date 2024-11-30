@@ -9,11 +9,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             # Check out the repository
-            - name: Configure Python
+            - name: Configure Repository checkout
               uses: actions/checkout@v2
 
             #Setup Node js
-            - name: Configure Python
+            - name: Configure Node
               uses: actions/setup-node@v3
               with:
                   node-version: 18 # Use the appropriate Node.js version for your project
