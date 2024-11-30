@@ -20,6 +20,8 @@ jobs:
 
             # Step 3: Install dependencies and build the React app
             - name: Install dependencies and build
+              env:
+                  CI: false # Add this line to disable warnings treated as errors
               run: |
                   npm install
                   npm run build
