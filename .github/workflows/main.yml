@@ -1,0 +1,36 @@
+name: CI
+on:
+    push:
+        branches:
+            - master #here we choose to deploy only when a push is detected on the main branch
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # Check out the repository
+            - name: Configure Python
+              uses: actions/checkout@v2
+
+            #Setup Node js
+            - name: Configure Python
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18 # Use the appropriate Node.js version for your project
+
+            # Step 3: Install dependencies and build the React app
+            - name: Install dependencies and build
+              run: |
+                  npm install
+                  npm run build
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: us-east-1 # Use your bucket region here
+
+            # Deploy to aws, --delete flag will remove any file in S3 bucket that are not in the deployed folder
+            - name: Deploy static site to S3 bucket
+              run: aws s3 sync ./build s3://fidelktest --delete
