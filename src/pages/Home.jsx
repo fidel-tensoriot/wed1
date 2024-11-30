@@ -131,7 +131,10 @@ function Home() {
                 id="rsvp"
             >
                 <h2 className="pt-8"> I want you here to stick to...</h2>
-                <p>Click on "Flip Card" button to to see more</p>
+                <p>
+                    Click on "Flip Card" button to to see more. RSVP IS ON
+                    SECOND CARD
+                </p>
                 <div className="grid md:flex p-8 gap-8 img-showcase scroller">
                     <Cards
                         img={img2}
