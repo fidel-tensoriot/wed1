@@ -18,6 +18,11 @@ jobs:
               with:
                   node-version: 18 # Use the appropriate Node.js version for your project
 
+            - name: Create .env file
+              run: |
+                  echo "REACT_APP_PHOTO_API=${{ secrets.REACT_APP_PHOTO_API }}" >> .env
+                  echo "REACT_APP_FORM_API=${{ secrets.REACT_APP_FORM_API }}" >> .env
+
             # Step 3: Install dependencies and build the React app
             - name: Install dependencies and build
               env:
