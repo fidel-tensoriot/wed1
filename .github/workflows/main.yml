@@ -45,10 +45,12 @@ jobs:
             # Deploy Lambda function
             - name: Deploy Lambda function
               run: |
+                  cd lambdas/wedPhotos
+
                   # Create a zip package for Lambda function
-                  zip -r lambda_function.zip lambdas/wedPhotos/lambda_function.py
+                  zip -r ../lambda_function.zip lambda_function.py
 
                   # Upload the zip file to Lambda
                   aws lambda update-function-code \
                     --function-name wed1LambdaPhotos \
-                    --zip-file fileb://lambda_function.zip
+                    --zip-file fileb://../lambda_function.zip
