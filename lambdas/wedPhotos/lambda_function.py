@@ -53,7 +53,7 @@ def handle_post(event):
             }
         
         # Create a folder structure based on the user's name
-        folder_path = f"{name}/"  # Use name as folder
+        # folder_path = f"{name}/"  # Use name as folder
         uploaded_files = []
         urls = []
 
@@ -62,7 +62,7 @@ def handle_post(event):
                 'put_object',
                 Params={
                     'Bucket': bucket_name, 
-                    'Key': f"{folder_path}{file['name']}",
+                    'Key': f"{name}/{file['name']}",
                     'ContentType': file.get('type')
                 },
                 ExpiresIn=3600,

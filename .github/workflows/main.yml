@@ -41,3 +41,14 @@ jobs:
             # Deploy to aws, --delete flag will remove any file in S3 bucket that are not in the deployed folder
             - name: Deploy static site to S3 bucket
               run: aws s3 sync ./build s3://fidelktest --delete
+
+            # Deploy Lambda function
+            - name: Deploy Lambda function
+              run: |
+                  # Create a zip package for Lambda function
+                  zip -r lambda_function.zip lambdas/wedPhotos/lambda_function.py
+
+                  # Upload the zip file to Lambda
+                  aws lambda update-function-code \
+                    --function-name wed1LambdaPhotos \
+                    --zip-file fileb://lambda_function.zip
