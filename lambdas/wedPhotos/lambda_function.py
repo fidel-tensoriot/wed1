@@ -55,35 +55,49 @@ def handle_post(event):
         # Create a folder structure based on the user's name
         folder_path = f"{name}/"  # Use name as folder
         uploaded_files = []
+        urls = []
 
-        for file in files:
-            # Each file should include filename and file data (or URL)
-            file_name = file['name']
-            file_data = file['data']  # Assume base64 or URL (you'll need to handle base64 decoding)
-            
-            # Here we will assume the file data is base64 and decode it
-            file_data_decoded = base64.b64decode(file_data)
-            
-            # Upload to S3 under the user's folder
-            s3.put_object(
-                Bucket=bucket_name,
-                Key=f"{folder_path}{file_name}",
-                Body=file_data_decoded,
-                ContentType="image/jpeg"  # Adjust according to file type
+        for file in files: 
+            url = s3.generate_presigned_url(
+                'put_object',
+                Params={
+                    'Bucket': bucket_name, 
+                    'Key': f"{folder_path}{file['name']}",
+                    'ContentType': file.get('type')
+                },
+                ExpiresIn=3600,
             )
+            urls.append({'name': file['name'], 'url': url})
+
+        # for file in files:
+        #     # Each file should include filename and file data (or URL)
+        #     file_name = file['name']
+        #     file_data = file['data']  # Assume base64 or URL (you'll need to handle base64 decoding)
             
-            # Keep track of the uploaded files
-            uploaded_files.append({
-                'name': file_name,
-                'url': f"https://{bucket_name}.s3.amazonaws.com/{folder_path}{file_name}"
-            })
+        #     # Here we will assume the file data is base64 and decode it
+        #     file_data_decoded = base64.b64decode(file_data)
+            
+        #     # Upload to S3 under the user's folder
+        #     s3.put_object(
+        #         Bucket=bucket_name,
+        #         Key=f"{folder_path}{file_name}",
+        #         Body=file_data_decoded,
+        #         ContentType="image/jpeg"  # Adjust according to file type
+        #     )
+            
+        #     # Keep track of the uploaded files
+        #     uploaded_files.append({
+        #         'name': file_name,
+        #         'url': f"https://{bucket_name}.s3.amazonaws.com/{folder_path}{file_name}"
+        #     })
 
         logger.info(f"success call on handle post, returning {uploaded_files}")
         return {
             'statusCode': 200,
             'body': json.dumps({
                 'message': 'Files uploaded successfully',
-                'uploaded_files': uploaded_files
+                # 'uploaded_files': uploaded_files,
+                'urls': urls
             })
         }
     except Exception as e:

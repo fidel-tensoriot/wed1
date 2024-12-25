@@ -86,25 +86,25 @@ function Gallery() {
         console.log("Selected Files:", files); // Array of File objects
 
         // Convert each file to base64
-        const filesWithBase64 = await Promise.all(
-            files.map((file) => {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        resolve({
-                            name: file.name,
-                            size: file.size,
-                            type: file.type,
-                            data: reader.result.split(",")[1], // Get base64 string
-                        });
-                    };
-                    reader.onerror = (error) => reject(error);
-                    reader.readAsDataURL(file);
-                });
-            })
-        );
+        // const filesWithBase64 = await Promise.all(
+        //     files.map((file) => {
+        //         return new Promise((resolve, reject) => {
+        //             const reader = new FileReader();
+        //             reader.onload = () => {
+        //                 resolve({
+        //                     name: file.name,
+        //                     size: file.size,
+        //                     type: file.type,
+        //                     data: reader.result.split(",")[1], // Get base64 string
+        //                 });
+        //             };
+        //             reader.onerror = (error) => reject(error);
+        //             reader.readAsDataURL(file);
+        //         });
+        //     })
+        // );
 
-        // Prepare payload
+        // // Prepare payload
         const payload = {
             name: values.name,
             description: values.desc,
@@ -113,7 +113,8 @@ function Gallery() {
             //     size: file.size,
             //     type: file.type,
             // })),
-            files: filesWithBase64, // Use files with base64 data
+            // files: filesWithBase64, // Use files with base64 data
+            files: files.map((file) => ({ name: file.name, type: file.type })),
         };
 
         // Submit payload using Axios
@@ -127,6 +128,18 @@ function Gallery() {
                     },
                 }
             );
+
+            await Promise.all(
+                files.map((file, index) => {
+                    const url = response.data.urls[index].url;
+                    return axios.put(url, file, {
+                        headers: {
+                            "Content-Type": file.type,
+                        },
+                    });
+                })
+            );
+
             console.log("Upload successful:", response.data);
             event.target.reset();
         } catch (error) {
