@@ -102,6 +102,29 @@ function Home() {
                         </button>
                     </p>
                     <p>
+                        <h4 className="text-3xl">Updated 3/23:</h4>
+                        Attire: The attire is dressy casual with a hobbit/soft
+                        cottagee core like theme. {}
+                        <a
+                            target="_blank"
+                            href="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR_NBYICnKv9PfK4eygAbRLWmvI641ZD5QsygWosWUnAPaY_yeGsB2QgPTvJ9tPdVxt8i_Spp0b46Q9yMqqF_pbUWAgF0FDS_rzY29aXSJH7TDzqRvzE9w0RQ"
+                            rel="noreferrer"
+                            className="text-blue-500 underline"
+                        >
+                            Pastel and muted colors
+                        </a>
+                        {} encouraged. No hawain shirts and dumb shit like that.
+                        <a
+                            target="_blank"
+                            href="https://images.app.goo.gl/ykkbHAFtJScNyffz5"
+                            rel="noreferrer"
+                            className="text-blue-500 underline"
+                        >
+                            Example of the vibes, throw flowers and acorns in
+                            your hair
+                        </a>
+                    </p>
+                    <p>
                         Wedding Ceremony: 12pm @
                         <a
                             href="https://www.google.com/maps?q=Chapel+of+the+Flowers,1717+Las+Vegas+Blvd+S,Las+Vegas,NV,89104"
