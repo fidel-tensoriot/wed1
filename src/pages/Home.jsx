@@ -92,7 +92,7 @@ function Home() {
                         <br /> <br />
                         <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
                             <a
-                                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karina+and+Fidel+Las+Vegas+Wedding&dates=20250627T120000/20250627T170000&details=Join+us+for+our+wedding+ceremony+and+reception+in+Las+Vegas!+Ceremony+at+12pm+at+Chapel+of+the+Flowers,+reception+at+2pm+at+Maggiano's.+We+look+forward+to+celebrating+with+you!&location=1717+Las+Vegas+Blvd+S,+Las+Vegas,+NV+89104"
+                                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karina+and+Fidel+Las+Vegas+Wedding&dates=20250627T120000/20250627T170000&details=Join+us+for+our+wedding+ceremony+and+reception+in+Las+Vegas!+Ceremony+at+12pm+at+Chapel+of+the+Flowers,+Reception+at+2pm+at+Maggiano's,+Karaoke+from+8:00+PM+to+11:00+PM+at+Ninja+Karaoke+in+Downtown+Las+Vegas.+We+look+forward+to+celebrating+with+you!&location=1717+Las+Vegas+Blvd+S,+Las+Vegas,+NV+89104"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-white"
@@ -146,6 +146,9 @@ function Home() {
                             Maggiano's
                         </a>
                         3200 Las Vegas Blvd S Suite 2144, Las Vegas, NV 89109
+
+                        <br></br><br></br>
+                        Ninja Karaoke: 8pm - 11pm @ downtown location.
                     </p>
                 </div>
             </div>
