@@ -35,6 +35,11 @@ function Navbar() {
                                 Gallery
                             </a>
                         </li>
+                        <li>
+                            <a href="/photobooth" className="p-4">
+                                Photobooth
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

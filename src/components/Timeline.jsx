@@ -3,7 +3,7 @@ import img2015 from "../photos/timeline/2015.png";
 import img2016 from "../photos/timeline/2016.jpg";
 import img2017 from "../photos/timeline/2017.JPG";
 import img2018 from "../photos/timeline/2018.jpg";
-import mov2018 from "../photos/timeline/MOV_2018.mp4"
+import mov2018 from "../photos/timeline/MOV_2018.mp4";
 import img2019 from "../photos/timeline/2019.jpg";
 import img2020 from "../photos/timeline/2020.jpg";
 import img2021 from "../photos/timeline/2021.jpg";
@@ -19,17 +19,30 @@ function Timeline() {
                             <div className="info">
                                 <h3 className="title">{timelineYear.title}</h3>
                                 <div className="timeline-body block md:flex">
-                                    { timelineYear.img ? (
+                                    {timelineYear.img ? (
                                         <>
-                                            <img src={timelineYear.img} alt="" loading="lazy" />
-                                            <p className="p-4 m-auto"> {timelineYear.text} </p>
-                                        </>)
-                                    :
-                                    <>
-                                        <video src={mov2018} controls></video>
-                                        <p className="p-4 m-auto"> {timelineYear.text} </p>
-                                    </>
-                                    }
+                                            <img
+                                                src={timelineYear.img}
+                                                alt=""
+                                                loading="lazy"
+                                            />
+                                            <p className="p-4 m-auto">
+                                                {" "}
+                                                {timelineYear.text}{" "}
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <video
+                                                src={mov2018}
+                                                controls
+                                            ></video>
+                                            <p className="p-4 m-auto">
+                                                {" "}
+                                                {timelineYear.text}{" "}
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -82,5 +95,10 @@ let timelineData = [
         title: 2022,
         img: img2022,
         text: "This year was tough with the loss of our little chihuahua but also had a lot of upsides. Cheers to 2022, excited to see what the future holds and I'm grateful for everything so far. ",
+    },
+    {
+        title: 2025,
+        img: img2022,
+        text: "Here is our wedding ceremony from July 27,2025",
     },
 ];
