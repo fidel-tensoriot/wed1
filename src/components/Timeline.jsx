@@ -27,19 +27,17 @@ function Timeline() {
                                                 loading="lazy"
                                             />
                                             <p className="p-4 m-auto">
-                                                {" "}
-                                                {timelineYear.text}{" "}
+                                                {timelineYear.text}
                                             </p>
                                         </>
                                     ) : (
                                         <>
                                             <video
-                                                src={mov2018}
+                                                src={timelineYear.vid}
                                                 controls
                                             ></video>
                                             <p className="p-4 m-auto">
-                                                {" "}
-                                                {timelineYear.text}{" "}
+                                                {timelineYear.text}
                                             </p>
                                         </>
                                     )}
@@ -98,7 +96,7 @@ let timelineData = [
     },
     {
         title: 2025,
-        img: img2022,
+        vid: "https://wed-bucket-photobooth-fidel.s3.us-east-1.amazonaws.com/wedVid/weddingVideo.mp4",
         text: "Here is our wedding ceremony from July 27,2025",
     },
 ];
