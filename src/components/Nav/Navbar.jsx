@@ -14,6 +14,7 @@ function Navbar() {
                     <a href="/#">Home</a>
                     <a href="/#rsvp">RSVP</a>
                     <a href="/gallery">Gallery</a>
+                    <a href="/photobooth">Photobooth</a>
                 </div>
 
                 {/* Mobile Menu */}

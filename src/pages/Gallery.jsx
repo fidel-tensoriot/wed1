@@ -250,11 +250,20 @@ function Gallery() {
                                                     })
                                                 }
                                             >
-                                                <img
-                                                    src={photoUrl}
-                                                    alt={`Uploaded by ${key} - ${photoIndex}`}
-                                                    className="rounded shadow-md max-w-full h-auto"
-                                                />
+                                                {photoUrl.endsWith(".mp4") ||
+                                                photoUrl.endsWith(".mov") ? (
+                                                    <video
+                                                        src={photoUrl}
+                                                        controls
+                                                        className="rounded shadow-md max-w-full h-auto"
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={photoUrl}
+                                                        alt={`Uploaded by ${key} - ${photoIndex}`}
+                                                        className="rounded shadow-md max-w-full h-auto"
+                                                    />
+                                                )}
                                             </div>
                                         )
                                     )}
@@ -268,11 +277,20 @@ function Gallery() {
             {/* Modal Section */}
             {currentModalPhoto && (
                 <Modal closeModal={closeModal}>
-                    <img
-                        src={currentModalPhoto.photoUrl}
-                        className="w-full h-auto max-w-full max-h-[75vh] object-contain"
-                        alt={`img  ${currentModalPhoto.photoUrl}`}
-                    />
+                    {currentModalPhoto.photoUrl.endsWith(".mp4") ||
+                    currentModalPhoto.photoUrl.endsWith(".mov") ? (
+                        <video
+                            src={currentModalPhoto.photoUrl}
+                            controls
+                            className="w-full h-auto max-w-full max-h-[75vh] object-contain"
+                        />
+                    ) : (
+                        <img
+                            src={currentModalPhoto.photoUrl}
+                            alt={`img ${currentModalPhoto.photoUrl}`}
+                            className="w-full h-auto max-w-full max-h-[75vh] object-contain"
+                        />
+                    )}
                     <button
                         onClick={() => handlePrevPhotoClick()}
                         className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-2xl z-10 p-2 md:p-8 bg-black opacity-60"
