@@ -221,7 +221,7 @@ function Gallery() {
                         type="file"
                         placeholder="Select photos to upload"
                         required={true}
-                        // multiple
+                        multiple
                     />
                     <button
                         type="submit"
