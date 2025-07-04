@@ -78,6 +78,12 @@ function Gallery() {
         event.preventDefault();
         setSubmittingFiles(true);
 
+        if (!files || files.length === 0) {
+            alert("No Files Selected. Please try again");
+            setSubmittingFiles(false);
+            return;
+        }
+
         const formData = new FormData(event.currentTarget);
         const values = Object.fromEntries(formData.entries());
         console.log("value", values, typeof values);
