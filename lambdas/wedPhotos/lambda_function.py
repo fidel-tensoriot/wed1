@@ -122,7 +122,7 @@ def handle_get(event):
             Prefix=prefix
         )
 
-        logger.info(f"prefix {prefix} for the bucket and response {response}")
+        # logger.info(f"prefix {prefix} for the bucket and response {response}")
 
         if 'Contents' not in response:
             return {
@@ -143,7 +143,7 @@ def handle_get(event):
             photo_url = f"https://{bucket_name}.s3.amazonaws.com/{unquote_plus(obj['Key'])}"
             photos[name].append(photo_url)
 
-        logger.info(f"list of photos to return to user {photos}")
+        # logger.info(f"list of photos to return to user {photos}")
         return {
             'statusCode': 200,
             'body': json.dumps({'photos': photos})
