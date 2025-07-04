@@ -78,18 +78,18 @@ function Gallery() {
         event.preventDefault();
         setSubmittingFiles(true);
 
-        if (!files || files.length === 0) {
-            alert("No Files Selected. Please try again");
-            setSubmittingFiles(false);
-            return;
-        }
-
         const formData = new FormData(event.currentTarget);
         const values = Object.fromEntries(formData.entries());
         console.log("value", values, typeof values);
 
         const files = formData.getAll("file");
         console.log("Selected Files:", files); // Array of File objects
+
+        if (!files || files.length === 0) {
+            alert("No Files Selected. Please try again");
+            setSubmittingFiles(false);
+            return;
+        }
 
         // Convert each file to base64
         // const filesWithBase64 = await Promise.all(
@@ -120,7 +120,10 @@ function Gallery() {
             //     type: file.type,
             // })),
             // files: filesWithBase64, // Use files with base64 data
-            files: files.map((file) => ({ name: file.name, type: file.type })),
+            files: files.map((file) => ({
+                name: file.name,
+                type: file.type || "application/octet-stream",
+            })),
         };
 
         // Submit payload using Axios
@@ -195,7 +198,7 @@ function Gallery() {
                         <input
                             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="name"
-                            name="name"
+                            name="name[]"
                             type="text"
                             placeholder="Name"
                             required={true}
