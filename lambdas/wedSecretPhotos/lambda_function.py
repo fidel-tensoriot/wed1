@@ -10,7 +10,7 @@ logger.setLevel(logging.INFO)
 
 s3=boto3.client('s3')
 bucket_name = 'wed-photographer'
-FOLDERS = ["Coronel_F&K_062725/Color/", "Coronel_F&K_062725_LS/Color/"]
+FOLDERS = ["Coronel_F&K_062725/Thb/", "Coronel_F&K_062725_LS/Thb/"]
 
 def lambda_handler(event, context):
     all_color_photos = []

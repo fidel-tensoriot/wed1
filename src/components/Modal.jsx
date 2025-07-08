@@ -27,6 +27,11 @@ export default function Modal({
         setCurrentModalPhoto(allPhotos[prevIndex]);
     }
 
+    const isThumbnail = currentPhoto.includes("Thb/");
+    const imgToShow = isThumbnail
+        ? currentPhoto?.replace("Thb/", "Color/")
+        : currentPhoto;
+
     return (
         <>
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-5">
@@ -49,8 +54,8 @@ export default function Modal({
                         />
                     ) : (
                         <img
-                            src={currentPhoto}
-                            alt={`img ${currentPhoto}`}
+                            src={imgToShow}
+                            alt={`img ${imgToShow}`}
                             className="w-full h-auto max-w-full max-h-[75vh] object-contain"
                         />
                     )}
