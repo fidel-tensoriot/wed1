@@ -3,41 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import Modal from "../components/Modal";
 import { useQuery } from "@tanstack/react-query";
 
-const MOCKQUERY = {
-    photos: {
-        "First Last": [
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/Screenshot from 2022-11-26 23-18-51.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/First Last/portfolio-fdlme.png",
-        ],
-        "John Doe": [
-            "https://wed-bucket-gallery.s3.amazonaws.com/John Doe/inheritance.png",
-        ],
-        Karina: [
-            "https://wed-bucket-gallery.s3.amazonaws.com/Karina/Screenshot from 2022-12-05 12-45-02.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/Karina/inheritance.png",
-            "https://wed-bucket-gallery.s3.amazonaws.com/Karina/IMG_20211218_145959.jpg",
-        ],
-    },
-};
-
 function Gallery() {
     const [currentModalPhoto, setCurrentModalPhoto] = useState(undefined); // photo to show within the modal
     const [submittingFiles, setSubmittingFiles] = useState(false);
@@ -55,32 +20,13 @@ function Gallery() {
     const allPhotos = useMemo(() => {
         if (galleryPhotos) {
             return Object.entries(galleryPhotos).flatMap(([user, photos]) =>
-                photos.map((photoUrl) => ({ user, photoUrl }))
+                photos.map((url) => ({ user, url }))
             );
         }
         return [];
     }, [galleryPhotos]);
 
     const closeModal = () => setCurrentModalPhoto(undefined);
-
-    function handleNextPhotoClick() {
-        // const currentIndex = allPhotos.indexOf(currentModalPhoto);
-        const currentIndex = allPhotos.findIndex(
-            (item) => item.photoUrl === currentModalPhoto.photoUrl
-        );
-        const nextIndex = (currentIndex + 1) % allPhotos.length; // Wraps around
-        setCurrentModalPhoto(allPhotos[nextIndex]);
-    }
-
-    function handlePrevPhotoClick() {
-        // const currentIndex = allPhotos.indexOf(currentModalPhoto);
-        const currentIndex = allPhotos.findIndex(
-            (item) => item.photoUrl === currentModalPhoto.photoUrl
-        );
-        const prevIndex =
-            (currentIndex - 1 + allPhotos.length) % allPhotos.length; // Wraps around
-        setCurrentModalPhoto(allPhotos[prevIndex]);
-    }
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -242,27 +188,27 @@ function Gallery() {
                                 <h2>{key}</h2>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 md:p-4">
                                     {galleryPhotos[key]?.map(
-                                        (photoUrl, photoIndex) => (
+                                        (url, photoIndex) => (
                                             <div
                                                 key={`photo-${index}-${photoIndex}`}
                                                 className="relative mt-2"
                                                 onClick={() =>
                                                     setCurrentModalPhoto({
                                                         user: key,
-                                                        photoUrl,
+                                                        url,
                                                     })
                                                 }
                                             >
-                                                {photoUrl.endsWith(".mp4") ||
-                                                photoUrl.endsWith(".mov") ? (
+                                                {url.endsWith(".mp4") ||
+                                                url.endsWith(".mov") ? (
                                                     <video
-                                                        src={photoUrl}
+                                                        src={url}
                                                         controls
                                                         className="rounded shadow-md max-w-full h-auto"
                                                     />
                                                 ) : (
                                                     <img
-                                                        src={photoUrl}
+                                                        src={url}
                                                         alt={`Uploaded by ${key} - ${photoIndex}`}
                                                         className="rounded shadow-md max-w-full h-auto"
                                                     />
@@ -279,34 +225,12 @@ function Gallery() {
 
             {/* Modal Section */}
             {currentModalPhoto && (
-                <Modal closeModal={closeModal}>
-                    {currentModalPhoto.photoUrl.endsWith(".mp4") ||
-                    currentModalPhoto.photoUrl.endsWith(".mov") ? (
-                        <video
-                            src={currentModalPhoto.photoUrl}
-                            controls
-                            className="w-full h-auto max-w-full max-h-[75vh] object-contain"
-                        />
-                    ) : (
-                        <img
-                            src={currentModalPhoto.photoUrl}
-                            alt={`img ${currentModalPhoto.photoUrl}`}
-                            className="w-full h-auto max-w-full max-h-[75vh] object-contain"
-                        />
-                    )}
-                    <button
-                        onClick={() => handlePrevPhotoClick()}
-                        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-2xl z-10 p-2 md:p-8 bg-black opacity-60"
-                    >
-                        ◀
-                    </button>
-                    <button
-                        onClick={() => handleNextPhotoClick()}
-                        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-2xl z-10 p-2 md:p-8 bg-black opacity-60"
-                    >
-                        ▶
-                    </button>
-                </Modal>
+                <Modal
+                    closeModal={closeModal}
+                    currentPhoto={currentModalPhoto.url}
+                    allPhotos={allPhotos}
+                    setCurrentModalPhoto={setCurrentModalPhoto}
+                />
             )}
         </section>
     );

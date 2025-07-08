@@ -140,8 +140,8 @@ def handle_get(event):
             if name not in photos:
                 photos[name] = []
 
-            photo_url = f"https://{bucket_name}.s3.amazonaws.com/{unquote_plus(obj['Key'])}"
-            photos[name].append(photo_url)
+            url = f"https://{bucket_name}.s3.amazonaws.com/{unquote_plus(obj['Key'])}"
+            photos[name].append(url)
 
         # logger.info(f"list of photos to return to user {photos}")
         return {

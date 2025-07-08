@@ -26,35 +26,12 @@ function PhotoBooth() {
 
     const closeModal = () => setCurrentModalPhoto(undefined);
 
-    function handleNextPhotoClick() {
-        // const currentIndex = allPhotos.indexOf(currentModalPhoto);
-        const currentIndex = allPhotos.findIndex(
-            (item) => item.url === currentModalPhoto.url
-        );
-        const nextIndex = (currentIndex + 1) % allPhotos.length; // Wraps around
-        setCurrentModalPhoto(allPhotos[nextIndex]);
-    }
-
-    function handlePrevPhotoClick() {
-        // const currentIndex = allPhotos.indexOf(currentModalPhoto);
-        const currentIndex = allPhotos.findIndex(
-            (item) => item.url === currentModalPhoto.url
-        );
-        const prevIndex =
-            (currentIndex - 1 + allPhotos.length) % allPhotos.length; // Wraps around
-        setCurrentModalPhoto(allPhotos[prevIndex]);
-    }
-
     async function fetchPhotoBooth() {
         const response = await axios.get(
             "https://kbpcwneafv5carzc3qarn75riq0sdsjt.lambda-url.us-east-1.on.aws/"
         );
         return response.data.photos;
     }
-
-    useEffect(() => {
-        fetchPhotoBooth();
-    }, []);
 
     return (
         <section className="mx-auto px-8">
@@ -66,7 +43,9 @@ function PhotoBooth() {
                         <div
                             key={`photo-${index}-${photo?.url}`}
                             className="relative mt-2"
-                            onClick={() => setCurrentModalPhoto(photo)}
+                            onClick={() => {
+                                setCurrentModalPhoto(photo);
+                            }}
                         >
                             <img
                                 src={photo?.url}
@@ -80,25 +59,12 @@ function PhotoBooth() {
 
             {/* Modal Section */}
             {currentModalPhoto && (
-                <Modal closeModal={closeModal}>
-                    <img
-                        src={currentModalPhoto.url}
-                        className="w-full h-auto max-w-full max-h-[75vh] object-contain"
-                        alt={`img  ${currentModalPhoto.url}`}
-                    />
-                    <button
-                        onClick={() => handlePrevPhotoClick()}
-                        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-2xl z-10 p-2 md:p-8 bg-black opacity-60"
-                    >
-                        ◀
-                    </button>
-                    <button
-                        onClick={() => handleNextPhotoClick()}
-                        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-2xl z-10 p-2 md:p-8 bg-black opacity-60"
-                    >
-                        ▶
-                    </button>
-                </Modal>
+                <Modal
+                    closeModal={closeModal}
+                    currentPhoto={currentModalPhoto.url}
+                    allPhotos={allPhotos}
+                    setCurrentModalPhoto={setCurrentModalPhoto}
+                />
             )}
         </section>
     );
