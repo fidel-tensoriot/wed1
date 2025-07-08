@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Modal from "../components/Modal";
 import { useQuery } from "@tanstack/react-query";
+
+import Modal from "../components/Modal";
 
 function PhotoBooth() {
     const [currentModalPhoto, setCurrentModalPhoto] = useState(undefined); // photo to show within the modal
@@ -28,7 +29,8 @@ function PhotoBooth() {
 
     async function fetchPhotoBooth() {
         const response = await axios.get(
-            "https://kbpcwneafv5carzc3qarn75riq0sdsjt.lambda-url.us-east-1.on.aws/"
+            // "https://kbpcwneafv5carzc3qarn75riq0sdsjt.lambda-url.us-east-1.on.aws/"
+            "https://r2i95qbgmk.execute-api.us-east-1.amazonaws.com/photobooth"
         );
         return response.data.photos;
     }
@@ -37,6 +39,8 @@ function PhotoBooth() {
         <section className="mx-auto px-8">
             <h2>PhotoBooth</h2>
             {isFetching && !photoBoothPhotos && <h3>Loading...</h3>}
+
+            {/* Photos section */}
             {photoBoothPhotos !== undefined && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 md:p-4">
                     {photoBoothPhotos?.map((photo, index) => (
