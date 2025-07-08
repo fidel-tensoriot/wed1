@@ -3,6 +3,7 @@ import boto3
 import os
 import logging
 import base64
+import urllib.parse
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ def lambda_handler(event, context):
                 key = obj["Key"]
                 if not key.lower().endswith((".jpg", ".jpeg", ".png")):
                     continue
-                url = f"https://{bucket_name}.s3.amazonaws.com/{key}"
+                url = f"https://{bucket_name}.s3.amazonaws.com/{urllib.parse.quote(key)}"
                 all_color_photos.append({"key": key, "url":url})
 
             if response.get("IsTruncated"):
