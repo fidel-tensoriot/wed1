@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { FaBars, FaWindowClose } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 function Navbar() {
     const [mobileMenu, setMobileMenu] = useState(false);
+
+    const mobileMenuFalse = () => setMobileMenu(false);
 
     return (
         <nav className="h-auto w-full bg-pink-200 sticky top-0 z-50 backdrop-filter backdrop-blur bg-opacity-70">
@@ -11,34 +15,38 @@ function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex gap-x-10">
-                    <a href="/#">Home</a>
-                    <a href="/#rsvp">RSVP</a>
-                    <a href="/gallery">Gallery</a>
-                    <a href="/photobooth">Photobooth</a>
+                    <Link to={"/"}>Home</Link>
+                    {/* <a href="/#rsvp">RSVP</a> */}
+                    <Link to={"/gallery"}>Gallery</Link>
+                    <Link to={"/photobooth"}>Photobooth</Link>
                 </div>
 
                 {/* Mobile Menu */}
                 <div className={mobileMenu ? "flex" : "hidden"}>
                     <ul className="">
-                        <li className="active">
-                            <a href="/" className="p-4">
+                        <li className="active p-2">
+                            <Link to="/" onClick={mobileMenuFalse}>
                                 Home
-                            </a>
+                            </Link>
                         </li>
-                        <li>
-                            <a href="/#rsvp" className="p-4">
+                        {/* <li>
+                            <a
+                                href="/#rsvp"
+                                className="p-4"
+                                onClick={mobileMenuFalse}
+                            >
                                 RSVP
                             </a>
-                        </li>
-                        <li>
-                            <a href="/gallery" className="p-4">
+                        </li> */}
+                        <li className="p-2">
+                            <Link to="/gallery" onClick={mobileMenuFalse}>
                                 Gallery
-                            </a>
+                            </Link>
                         </li>
-                        <li>
-                            <a href="/photobooth" className="p-4">
+                        <li className="p-2">
+                            <Link to="/photobooth" onClick={mobileMenuFalse}>
                                 Photobooth
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

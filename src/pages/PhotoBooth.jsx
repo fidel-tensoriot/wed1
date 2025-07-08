@@ -1,20 +1,28 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
+import { useQuery } from "@tanstack/react-query";
 
 function PhotoBooth() {
-    const [loading, setLoading] = useState(false); // Loading state
-    const [gallery, setGallery] = useState(undefined); // State to hold image URLs should be undefined when empty
     const [currentModalPhoto, setCurrentModalPhoto] = useState(undefined); // photo to show within the modal
+
+    const {
+        data: photoBoothPhotos,
+        isLoading,
+        isFetching,
+    } = useQuery({
+        queryKey: ["getPhotoBoothPhotos"],
+        queryFn: fetchPhotoBooth,
+    });
 
     // Combine all photos into a single array
     const allPhotos = useMemo(() => {
-        if (gallery) {
-            return gallery;
+        if (photoBoothPhotos) {
+            return photoBoothPhotos;
         }
 
         return [];
-    }, [gallery]);
+    }, [photoBoothPhotos]);
 
     const closeModal = () => setCurrentModalPhoto(undefined);
 
@@ -38,20 +46,10 @@ function PhotoBooth() {
     }
 
     async function fetchPhotoBooth() {
-        setLoading(true);
-
-        try {
-            const response = await axios.get(
-                "https://kbpcwneafv5carzc3qarn75riq0sdsjt.lambda-url.us-east-1.on.aws/"
-            );
-            setGallery(response.data.photos); // Update gallery state with fetched photos
-
-            console.log("fetched gallery:", response.data);
-        } catch (error) {
-            console.error("Error fetching gallery:", error);
-        } finally {
-            setLoading(false);
-        }
+        const response = await axios.get(
+            "https://kbpcwneafv5carzc3qarn75riq0sdsjt.lambda-url.us-east-1.on.aws/"
+        );
+        return response.data.photos;
     }
 
     useEffect(() => {
@@ -61,10 +59,10 @@ function PhotoBooth() {
     return (
         <section className="mx-auto px-8">
             <h2>PhotoBooth</h2>
-            {loading && <h3>Loading...</h3>}
-            {gallery !== undefined && (
+            {isFetching && !photoBoothPhotos && <h3>Loading...</h3>}
+            {photoBoothPhotos !== undefined && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 md:p-4">
-                    {gallery?.map((photo, index) => (
+                    {photoBoothPhotos?.map((photo, index) => (
                         <div
                             key={`photo-${index}-${photo?.url}`}
                             className="relative mt-2"

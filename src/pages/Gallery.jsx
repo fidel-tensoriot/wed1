@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import Modal from "../components/Modal";
+import { useQuery } from "@tanstack/react-query";
 
 const MOCKQUERY = {
     photos: {
@@ -38,20 +39,27 @@ const MOCKQUERY = {
 };
 
 function Gallery() {
-    const [gallery, setGallery] = useState(undefined); // State to hold image URLs should be undefined when empty
-    const [loading, setLoading] = useState(false); // Loading state
     const [currentModalPhoto, setCurrentModalPhoto] = useState(undefined); // photo to show within the modal
     const [submittingFiles, setSubmittingFiles] = useState(false);
 
+    const {
+        data: galleryPhotos,
+        isLoading,
+        isFetching,
+    } = useQuery({
+        queryKey: ["getGalleryPhotos"],
+        queryFn: fetchGallery,
+    });
+
     // Combine all photos into a single array
     const allPhotos = useMemo(() => {
-        if (gallery) {
-            return Object.entries(gallery).flatMap(([user, photos]) =>
+        if (galleryPhotos) {
+            return Object.entries(galleryPhotos).flatMap(([user, photos]) =>
                 photos.map((photoUrl) => ({ user, photoUrl }))
             );
         }
         return [];
-    }, [gallery]);
+    }, [galleryPhotos]);
 
     const closeModal = () => setCurrentModalPhoto(undefined);
 
@@ -159,25 +167,11 @@ function Gallery() {
     }
 
     async function fetchGallery() {
-        setLoading(true);
-
-        try {
-            const response = await axios.get(
-                "https://ucvaqlgpu4pvjacb3xx5z43ryi0ujnun.lambda-url.us-east-1.on.aws/"
-            );
-            setGallery(response.data.photos); // Update gallery state with fetched photos
-
-            console.log("fetched gallery:", response.data);
-        } catch (error) {
-            console.error("Error fetching gallery:", error);
-        } finally {
-            setLoading(false);
-        }
+        const response = await axios.get(
+            "https://ucvaqlgpu4pvjacb3xx5z43ryi0ujnun.lambda-url.us-east-1.on.aws/"
+        );
+        return response.data.photos;
     }
-
-    useEffect(() => {
-        fetchGallery();
-    }, []);
 
     return (
         <section className="mx-auto px-8">
@@ -240,14 +234,14 @@ function Gallery() {
             {/* Uploaded photos section */}
             <>
                 <h2 className="mt-8">Uploaded Photos</h2>
-                {loading && <h3>Loading...</h3>}
-                {gallery !== undefined && (
+                {isFetching && !galleryPhotos && <h3>Loading...</h3>}
+                {galleryPhotos !== undefined && (
                     <div>
-                        {Object.keys(gallery).map((key, index) => (
+                        {Object.keys(galleryPhotos).map((key, index) => (
                             <div key={index} className="">
                                 <h2>{key}</h2>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 md:p-4">
-                                    {gallery[key]?.map(
+                                    {galleryPhotos[key]?.map(
                                         (photoUrl, photoIndex) => (
                                             <div
                                                 key={`photo-${index}-${photoIndex}`}
